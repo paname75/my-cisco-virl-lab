@@ -1,0 +1,14 @@
+workspace = /var/vmcloud
+
+#specify an interface(for example: eth0, lo) on which vmcloud telnet server to listen 
+#for connection request. eth0 is default value
+telnet_if = lo
+telnet_port = 3533
+
+#format: <lan_name> <IP_address_of_lan_bridge>/<prefixlen>
+#where: length of <lan_name> must not more than 12
+#       <lan_name> must match those defined in topology VIRL file
+#       for example: <node name="vmc_lan_1" type="SEGMENT">
+#       multiple VIRL files can include same <lan_name>, they will share the subnet 
+#multiple lans can be listed and separated with ','
+routable_lans = vmc_lan_1 10.10.10.1/24, vmc_lan_2 10.254.254.1/24
