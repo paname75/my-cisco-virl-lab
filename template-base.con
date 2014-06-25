@@ -1,0 +1,62 @@
+version 15.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname #ROUTERNAME#
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+no ip domain-lookup
+ip cef
+no ipv6 cef
+ipv6 multicast rpf use-bgp
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+redundancy
+!
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+line aux 0
+line vty 0 4
+ transport input all
+!
+! 
+!event manager applet load_initial_state
+! event timer countdown name Delay time 20
+! action 0.0 cli command "enable"
+! action 1.0 cli command "config terminal"
+! action 2.0 cli command "file prompt quiet"
+! action 3.0 cli command "copy replace flash2://router1.init running-config"
+! action 4.0 syslog msg "Loaded initial configuration for this LAB"
+!
+end
+
+
