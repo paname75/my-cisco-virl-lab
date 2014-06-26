@@ -43,13 +43,6 @@ end
         </extensions>
         <interface name="GigabitEthernet0/1"/>
    </node>
-<node name="R3" type="SIMPLE" subtype="vios" location="188,263" vmImage="/usr/share/vmcloud/data/images/vios.ova">
-        <extensions>
-                <entry key="bootstrap configuration" type="String">R3.txt</entry>
-        </extensions>
-        <interface name="GigabitEthernet0/1"/>
-   </node>
-
     <node name="lan_ex" type="SEGMENT" location="722,161"/>
     <connection src="/topology/node[2]/interface[1]" dst="/topology/node[1]"/>
     <connection src="/topology/node[3]/interface[1]" dst="/topology/node[1]"/>
