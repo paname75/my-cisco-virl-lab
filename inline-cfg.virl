@@ -46,5 +46,4 @@ end
     <node name="lan_ex" type="SEGMENT" location="722,161"/>
     <connection src="/topology/node[2]/interface[1]" dst="/topology/node[1]"/>
     <connection src="/topology/node[3]/interface[1]" dst="/topology/node[1]"/>
-    <connection src="/topology/node[4]/interface[1]" dst="/topology/node[1]"/>
 </topology>
