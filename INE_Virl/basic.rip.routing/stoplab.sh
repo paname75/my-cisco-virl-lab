@@ -1,0 +1,1 @@
+vmcloud netdelete basic_rip_routing

@@ -1,0 +1,1 @@
+vmcloud netdelete basic_layer_2_switching

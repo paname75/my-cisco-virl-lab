@@ -1,0 +1,142 @@
+
+!
+! Last configuration change at 23:20:19 UTC Tue Aug 5 2014
+!
+version 15.4
+no service timestamps debug uptime
+no service timestamps log uptime
+
+
+!
+hostname R7
+!
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+no ip domain lookup
+
+!
+!
+!
+ipv6 unicast-routing
+!
+!
+!
+!
+!
+!
+!
+
+!
+multilink bundle-name authenticated
+!
+!
+
+
+!
+!
+redundancy
+ 
+!
+!
+!
+!
+!
+cdp run
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+! 
+! 
+!
+interface Loopback0
+ ip address 150.1.7.7 255.255.255.255
+ ipv6 address 2001:150:7:7::7/128
+!
+interface GigabitEthernet0/1
+ no ip address
+ 
+ no shutdown
+ cdp enable
+!
+interface GigabitEthernet0/1.7
+ encapsulation dot1Q 7
+ ip address 155.1.7.7 255.255.255.0
+ ipv6 address 2001:155:1:7::7/64
+!
+interface GigabitEthernet0/1.37
+ encapsulation dot1Q 37
+ ip address 155.1.37.7 255.255.255.0
+ ipv6 address 2001:155:1:37::7/64
+!
+interface GigabitEthernet0/1.67
+ encapsulation dot1Q 67
+ ip address 155.1.67.7 255.255.255.0
+ ipv6 address 2001:155:1:67::7/64
+!
+interface GigabitEthernet0/1.79
+ encapsulation dot1Q 79
+ ip address 155.1.79.7 255.255.255.0
+ ipv6 address 2001:155:1:79::7/64
+!
+interface GigabitEthernet0/2
+ no ip address
+ shutdown
+ 
+!
+interface GigabitEthernet0/3
+ no ip address
+ shutdown
+ 
+!
+!
+router eigrp 100
+ network 155.1.7.7 0.0.0.0
+ network 155.1.37.7 0.0.0.0
+ network 155.1.67.7 0.0.0.0
+!
+no ip forward-protocol nd
+!
+ip community-list expanded AS200 permit 200:[0-9]+_
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ privilege level 15
+ no login
+!
+!
+end

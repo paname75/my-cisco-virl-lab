@@ -1,0 +1,150 @@
+
+!
+! Last configuration change at 23:16:21 UTC Tue Aug 5 2014
+!
+version 15.4
+no service timestamps debug uptime
+no service timestamps log uptime
+
+
+!
+hostname R8
+!
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+no ip domain lookup
+
+!
+!
+!
+ipv6 unicast-routing
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+!
+multilink bundle-name authenticated
+!
+!
+
+
+!
+!
+redundancy
+ 
+!
+!
+!
+!
+!
+cdp run
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+! 
+! 
+!
+interface Loopback0
+ ip address 150.1.8.8 255.255.255.255
+ ipv6 address 2001:150:8:8::8/128
+!
+interface GigabitEthernet0/1
+ no ip address
+ negotiation auto
+ no shutdown
+ cdp enable
+!
+interface GigabitEthernet0/1.8
+ encapsulation dot1Q 8
+ ip address 155.1.8.8 255.255.255.0
+ ipv6 address 2001:155:1:8::8/64
+!
+interface GigabitEthernet0/1.58
+ encapsulation dot1Q 58
+ ip address 155.1.58.8 255.255.255.0
+ ipv6 address 2001:155:1:58::8/64
+!
+interface GigabitEthernet0/1.108
+ encapsulation dot1Q 108
+ ip address 155.1.108.8 255.255.255.0
+ ipv6 address 2001:155:1:108::8/64
+!
+interface GigabitEthernet0/2
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface GigabitEthernet0/3
+ no ip address
+ shutdown
+ negotiation auto
+!
+!
+router eigrp 100
+ network 155.1.8.8 0.0.0.0
+ network 155.1.58.8 0.0.0.0
+ network 155.1.108.0 0.0.0.255
+ passive-interface GigabitEthernet0/1.108
+!
+router bgp 100
+ bgp log-neighbor-changes
+ network 150.1.8.8 mask 255.255.255.255
+ neighbor 155.1.0.1 remote-as 100
+ neighbor 155.1.0.2 remote-as 100
+ neighbor 155.1.0.3 remote-as 100
+ neighbor 155.1.0.4 remote-as 100
+ neighbor 155.1.37.7 remote-as 100
+ neighbor 155.1.58.5 remote-as 100
+ neighbor 155.1.108.10 remote-as 54
+ neighbor 155.1.146.6 remote-as 100
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line vty 0 4
+ privilege level 15
+ no login
+!
+!
+end

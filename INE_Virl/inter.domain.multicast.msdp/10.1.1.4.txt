@@ -1,0 +1,164 @@
+
+!
+! Last configuration change at 23:22:47 UTC Tue Aug 5 2014
+!
+version 15.4
+no service timestamps debug uptime
+no service timestamps log uptime
+
+
+!
+hostname R4
+!
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+ip multicast-routing distributed
+no ip domain lookup
+
+!
+!
+!
+ipv6 unicast-routing
+!
+!
+!
+!
+!
+!
+!
+
+!
+multilink bundle-name authenticated
+!
+!
+
+
+!
+!
+redundancy
+ 
+!
+!
+!
+!
+!
+cdp run
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+! 
+! 
+!
+interface Loopback0
+ ip address 150.1.4.4 255.255.255.255
+ ipv6 address 2001:150:4:4::4/128
+!
+interface GigabitEthernet0/1
+ no ip address
+ 
+ no shutdown
+ cdp enable
+!
+interface GigabitEthernet0/1.45
+ encapsulation dot1Q 45
+ ip address 155.1.45.4 255.255.255.0
+ ip pim sparse-mode
+ ipv6 address 2001:155:1:45::4/64
+!
+interface GigabitEthernet0/1.100
+ encapsulation dot1Q 100
+ ip address 169.254.100.4 255.255.255.0
+ ipv6 address 2001:169:254:100::4/64
+!
+interface GigabitEthernet0/1.146
+ encapsulation dot1Q 146
+ ip address 155.1.146.4 255.255.255.0
+ ip pim sparse-mode
+ ipv6 address 2001:155:1:146::4/64
+!
+interface GigabitEthernet0/2
+ no ip address
+ shutdown
+ 
+!
+interface GigabitEthernet0/3
+ no ip address
+ shutdown
+ 
+!
+router ospf 1
+ passive-interface GigabitEthernet0/1.146
+ network 150.1.4.4 0.0.0.0 area 0
+ network 155.1.45.4 0.0.0.0 area 0
+!
+router bgp 200
+ bgp log-neighbor-changes
+ neighbor 150.1.5.5 remote-as 200
+ neighbor 150.1.5.5 update-source Loopback0
+ neighbor 155.1.146.6 remote-as 100
+ !
+ address-family ipv4
+  redistribute ospf 1
+  neighbor 150.1.5.5 activate
+  neighbor 150.1.5.5 next-hop-self
+  neighbor 155.1.146.6 activate
+ exit-address-family
+ !
+ address-family ipv4 multicast
+  redistribute ospf 1
+  neighbor 150.1.5.5 activate
+  neighbor 150.1.5.5 next-hop-self
+  neighbor 155.1.146.6 activate
+  neighbor 155.1.146.6 route-map PREPEND out
+ exit-address-family
+!
+!
+!
+no ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+!
+route-map PREPEND permit 10
+ set as-path prepend 200 200 200
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ privilege level 15
+ no login
+!
+!
+end

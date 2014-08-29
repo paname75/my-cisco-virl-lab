@@ -1,0 +1,1 @@
+vmcloud netdelete basic_bgp_routing_with_aggregation

@@ -1,0 +1,1 @@
+vmcloud netdelete ipv6_multicast_initial

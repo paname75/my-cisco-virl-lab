@@ -1,0 +1,137 @@
+
+!
+! Last configuration change at 00:41:05 UTC Wed Aug 6 2014
+!
+version 15.4
+no service timestamps debug uptime
+no service timestamps log uptime
+
+
+!
+hostname R6
+!
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+no ip domain lookup
+
+ip dhcp excluded-address 155.1.146.100 155.1.146.254
+!
+ip dhcp pool VLAN146
+ network 155.1.146.0 255.255.255.0
+ default-router 155.1.146.6 155.1.146.4 
+ dns-server 155.1.146.6 155.1.146.4 
+ lease 0 12
+!
+!
+!
+ipv6 unicast-routing
+!
+!
+!
+!
+!
+!
+!
+
+!
+multilink bundle-name authenticated
+!
+!
+
+
+!
+!
+redundancy
+ 
+!
+!
+!
+!
+!
+cdp run
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+! 
+! 
+!
+interface Loopback0
+ ip address 150.1.6.6 255.255.255.255
+ ipv6 address 2001:150:6:6::6/128
+!
+interface GigabitEthernet0/1
+ no ip address
+ 
+ no shutdown
+ cdp enable
+!
+interface GigabitEthernet0/1.67
+ encapsulation dot1Q 67
+ ip address 155.1.67.6 255.255.255.0
+ ipv6 address 2001:155:1:67::6/64
+!
+interface GigabitEthernet0/1.146
+ encapsulation dot1Q 146
+ ip address 155.1.146.6 255.255.255.0
+ ipv6 address 2001:155:1:146::6/64
+!
+interface GigabitEthernet0/2
+ no ip address
+ shutdown
+ 
+!
+interface GigabitEthernet0/3
+ no ip address
+ shutdown
+ 
+!
+!
+router eigrp 100
+ network 150.1.0.0
+ network 155.1.0.0
+!
+no ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ privilege level 15
+ no login
+!
+!
+end

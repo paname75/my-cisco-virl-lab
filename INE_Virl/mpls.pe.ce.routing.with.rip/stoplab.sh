@@ -1,0 +1,1 @@
+vmcloud netdelete mpls_pe_ce_routing_with_rip

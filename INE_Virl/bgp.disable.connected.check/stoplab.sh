@@ -1,0 +1,1 @@
+vmcloud netdelete bgp_disable_connected_check

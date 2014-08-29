@@ -1,0 +1,1 @@
+vmcloud netdelete mpls_ospf_sham_link

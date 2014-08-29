@@ -1,0 +1,1 @@
+vmcloud netdelete bgp_over_gre

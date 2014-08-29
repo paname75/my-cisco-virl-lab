@@ -1,0 +1,150 @@
+
+!
+! Last configuration change at 23:21:32 UTC Tue Aug 5 2014
+!
+version 15.4
+no service timestamps debug uptime
+no service timestamps log uptime
+
+
+!
+hostname R10
+!
+!
+!
+vrf definition AS_254
+ rd 100:100
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+no ip domain lookup
+
+!
+!
+!
+ipv6 unicast-routing
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+!
+multilink bundle-name authenticated
+!
+!
+
+
+!
+!
+redundancy
+ 
+!
+!
+!
+!
+!
+cdp run
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+! 
+! 
+!
+interface Loopback0
+ ip address 150.1.10.10 255.255.255.255
+ ipv6 address 2001:150:10:10::10/128
+!
+interface GigabitEthernet0/1
+ no ip address
+ negotiation auto
+ no shutdown
+ cdp enable
+!
+interface GigabitEthernet0/1.10
+ encapsulation dot1Q 10
+ ip address 155.1.10.10 255.255.255.0
+ ipv6 address 2001:155:1:10::10/64
+!
+interface GigabitEthernet0/1.108
+ encapsulation dot1Q 108
+ ip address 155.1.108.10 255.255.255.0
+ ipv6 address 2001:155:1:108::10/64
+!
+interface GigabitEthernet0/2
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface GigabitEthernet0/3
+ no ip address
+ shutdown
+ negotiation auto
+!
+!
+router eigrp 100
+ network 150.1.0.0
+ network 155.1.0.0
+!
+!
+virtual-service csr_mgmt
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line vty 0
+ privilege level 15
+ no login
+line vty 1
+ privilege level 15
+ no login
+ length 0
+line vty 2 4
+ privilege level 15
+ no login
+!
+!
+end

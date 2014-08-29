@@ -1,0 +1,1 @@
+vmcloud netdelete ebgp_multihop

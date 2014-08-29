@@ -1,0 +1,158 @@
+
+!
+! Last configuration change at 23:22:47 UTC Tue Aug 5 2014
+!
+version 15.4
+no service timestamps debug uptime
+no service timestamps log uptime
+
+
+!
+hostname R6
+!
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+ip multicast-routing distributed
+no ip domain lookup
+
+!
+!
+!
+ipv6 unicast-routing
+!
+!
+!
+!
+!
+!
+!
+
+!
+multilink bundle-name authenticated
+!
+!
+
+
+!
+!
+redundancy
+ 
+!
+!
+!
+!
+!
+cdp run
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+! 
+! 
+!
+interface Loopback0
+ ip address 150.1.6.6 255.255.255.255
+ ipv6 address 2001:150:6:6::6/128
+!
+interface GigabitEthernet0/1
+ no ip address
+ 
+ no shutdown
+ cdp enable
+!
+interface GigabitEthernet0/1.67
+ encapsulation dot1Q 67
+ ip address 155.1.67.6 255.255.255.0
+ ip pim sparse-mode
+ ipv6 address 2001:155:1:67::6/64
+!
+interface GigabitEthernet0/1.146
+ encapsulation dot1Q 146
+ ip address 155.1.146.6 255.255.255.0
+ ip pim sparse-mode
+ ipv6 address 2001:155:1:146::6/64
+!
+interface GigabitEthernet0/2
+ no ip address
+ shutdown
+ 
+!
+interface GigabitEthernet0/3
+ no ip address
+ shutdown
+ 
+!
+router ospf 1
+ router-id 150.1.6.6
+ network 150.1.6.6 0.0.0.0 area 0
+ network 155.1.67.6 0.0.0.0 area 0
+!
+router bgp 100
+ bgp log-neighbor-changes
+ neighbor 150.1.7.7 remote-as 100
+ neighbor 150.1.7.7 update-source Loopback0
+ neighbor 155.1.146.4 remote-as 200
+ !
+ address-family ipv4
+  redistribute ospf 1
+  neighbor 150.1.7.7 activate
+  neighbor 150.1.7.7 next-hop-self
+  neighbor 155.1.146.4 activate
+ exit-address-family
+ !
+ address-family ipv4 multicast
+  redistribute ospf 1
+  neighbor 150.1.7.7 activate
+  neighbor 150.1.7.7 next-hop-self
+  neighbor 155.1.146.4 activate
+  neighbor 155.1.146.4 route-map PREPEND out
+ exit-address-family
+!
+no ip forward-protocol nd
+!
+ip pim rp-address 150.1.7.7
+no ip http server
+no ip http secure-server
+!
+!
+route-map PREPEND permit 10
+ set as-path prepend 100 100 100
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ privilege level 15
+ no login
+!
+!
+end
