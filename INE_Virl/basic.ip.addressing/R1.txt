@@ -78,47 +78,47 @@ interface Tunnel0
  ip nhrp holdtime 300
  ip nhrp nhs 155.1.0.5
  ip tcp adjust-mss 1360
- tunnel source GigabitEthernet0/0/1.100
+ tunnel source GigabitEthernet0/1.100
  tunnel mode gre multipoint
  tunnel key 150
  tunnel protection ipsec profile DMVPN_PROFILE
 !
-interface GigabitEthernet0/0/0
+interface GigabitEthernet0/0
  no ip address
  shutdown
  duplex auto
  speed auto
  media-type rj45
 !
-interface GigabitEthernet0/0/1
+interface GigabitEthernet0/1
  no ip address
  duplex auto
  speed auto
  media-type rj45
 !
-interface GigabitEthernet0/0/1.13
+interface GigabitEthernet0/1.13
  encapsulation dot1Q 13
  ip address 155.1.13.1 255.255.255.0
  ipv6 address 2001:155:1:13::1/64
 !
-interface GigabitEthernet0/0/1.100
+interface GigabitEthernet0/1.100
  encapsulation dot1Q 100
  ip address 169.254.100.1 255.255.255.0
  ipv6 address 2001:169:254:100::1/64
 !
-interface GigabitEthernet0/0/1.146
+interface GigabitEthernet0/1.146
  encapsulation dot1Q 146
  ip address 155.1.146.1 255.255.255.0
  ipv6 address 2001:155:1:146::1/64
 !         
-interface GigabitEthernet0/0/2
+interface GigabitEthernet0/2
  no ip address
  shutdown
  duplex auto
  speed auto
  media-type rj45
 !
-interface GigabitEthernet0/0/3
+interface GigabitEthernet0/3
  no ip address
  shutdown
  duplex auto

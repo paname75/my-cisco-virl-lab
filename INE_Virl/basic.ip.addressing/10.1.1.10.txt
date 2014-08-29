@@ -76,28 +76,28 @@ interface Loopback0
  ip address 150.1.10.10 255.255.255.255
  ipv6 address 2001:150:10:10::10/128
 !
-interface GigabitEthernet0/0/1
+interface GigabitEthernet0/1
  no ip address
  
  no shutdown
  cdp enable
 !
-interface GigabitEthernet0/0/1.10
+interface GigabitEthernet0/1.10
  encapsulation dot1Q 10
  ip address 155.1.10.10 255.255.255.0
  ipv6 address 2001:155:1:10::10/64
 !
-interface GigabitEthernet0/0/1.108
+interface GigabitEthernet0/1.108
  encapsulation dot1Q 108
  ip address 155.1.108.10 255.255.255.0
  ipv6 address 2001:155:1:108::10/64
 !
-interface GigabitEthernet0/0/2
+interface GigabitEthernet0/2
  no ip address
  shutdown
  
 !
-interface GigabitEthernet0/0/3
+interface GigabitEthernet0/3
  no ip address
  shutdown
  

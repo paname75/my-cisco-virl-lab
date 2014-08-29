@@ -99,43 +99,43 @@ interface Tunnel0
  ip nhrp holdtime 300
  ip nhrp nhs 155.1.0.5
  ip tcp adjust-mss 1360
- tunnel source GigabitEthernet0/0/1.100
+ tunnel source GigabitEthernet0/1.100
  tunnel mode gre multipoint
  tunnel key 150
  tunnel protection ipsec profile DMVPN_PROFILE
 !
-interface GigabitEthernet0/0/1
+interface GigabitEthernet0/1
  no ip address
  
  no shutdown
  cdp enable
 !
-interface GigabitEthernet0/0/1.13
+interface GigabitEthernet0/1.13
  encapsulation dot1Q 13
  ip address 155.1.13.3 255.255.255.0
  ipv6 address 2001:155:1:13::3/64
 !
-interface GigabitEthernet0/0/1.23
+interface GigabitEthernet0/1.23
  encapsulation dot1Q 23
  ip address 155.1.23.3 255.255.255.0
  ipv6 address 2001:155:1:23::3/64
 !
-interface GigabitEthernet0/0/1.37
+interface GigabitEthernet0/1.37
  encapsulation dot1Q 37
  ip address 155.1.37.3 255.255.255.0
  ipv6 address 2001:155:1:37::3/64
 !
-interface GigabitEthernet0/0/1.100
+interface GigabitEthernet0/1.100
  encapsulation dot1Q 100
  ip address 169.254.100.3 255.255.255.0
  ipv6 address 2001:169:254:100::3/64
 !
-interface GigabitEthernet0/0/2
+interface GigabitEthernet0/2
  no ip address
  shutdown
  
 !
-interface GigabitEthernet0/0/3
+interface GigabitEthernet0/3
  no ip address
  shutdown
  
