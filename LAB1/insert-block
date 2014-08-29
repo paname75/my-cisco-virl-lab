@@ -1,1 +1,0 @@
-sed -i '40a\interface GigabitEthernet0/0\n no ip address\n no shutdown\n duplex auto\n speed auto\n media-type rj45\n!' R*.con 
